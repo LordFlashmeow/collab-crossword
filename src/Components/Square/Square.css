@@ -1,0 +1,31 @@
+td {
+    padding:0; margin:0;
+    border: 1px solid black;
+
+    width: 1.25em;
+    height: 1.25em;
+
+    /*font-weight: bold;*/
+
+    /*width: 33%;*/
+    /*padding-bottom: 33%;*/
+    /*height: 0;*/
+}
+
+table {
+    float: right;
+    border-spacing: 0;
+    border: 1px solid black;
+
+    /*Always take up half the size of the shorter dimension of the screen, stay square, but don't shrink below 630 px
+    630 px is the minimum size (for now) before the squares start collapsing on themselves*/
+    height: 50vmin;
+    width: 50vmin;
+
+    min-height: 630px;
+    min-width: 630px;
+
+    font-size: 30px;
+    text-transform: uppercase;
+    text-align: center;
+}
