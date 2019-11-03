@@ -12,8 +12,12 @@ class App extends React.Component {
             puzzle: [],
             userPuzzle: [],
             currentCell: 0,
-            textDirection: 'horizontal'
+            textDirection: 'horizontal',
+            selectedClue: {clueNumber: 1, direction: 'across'}
         }
+
+        this.onClueClick = this.onClueClick.bind(this);
+        this.onSquareClick = this.onSquareClick.bind(this);
     }
 
     componentDidMount() {
@@ -78,6 +82,22 @@ class App extends React.Component {
 
     }
 
+    onClueClick(e) {
+        console.log(e.target.dataset.direction);
+        console.log(e.target.dataset.number);
+
+        this.setHighlightedClue(e.target.dataset.direction, e.target.dataset.number)
+
+    }
+
+    onSquareClick(e) {
+
+    }
+
+    setHighlightedClue(direction, number) {
+        this.setState({selectedClue: {clueNumber: Number(number), direction: direction}})
+    }
+
     setPuzzleLetter(letter, index) {
         let newPuzzle = this.state.userPuzzle;
         newPuzzle[this.state.currentCell] = letter;
@@ -98,10 +118,11 @@ class App extends React.Component {
         }
 
         let tableBody = puzzleGrid.map((row, rowIndex) => {
+            let number = null;
             return (<tr>
                 {row.map(cell => {
                     return (
-                        <Square letter={cell}/>
+                        <Square onSquareClick={this.onSquareClick} number={number} letter={cell}/>
                     )
                 })}
             </tr>)
@@ -116,7 +137,8 @@ class App extends React.Component {
                     </tbody>
                 </table>
                 <div className={'container'}>
-                    <Clues across={data.clues.across} down={data.clues.down}/>
+                    <Clues across={data.clues.across} down={data.clues.down} onClueClick={this.onClueClick}
+                           selectedClue={this.state.selectedClue}/>
                 </div>
             </div>
         );

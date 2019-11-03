@@ -6,5 +6,12 @@ export default function Square(props) {
     if (props.letter === '.') {
         style['backgroundColor'] = 'black'
     }
-    return <td style={style}>{props.letter}</td>
+    if (props.selectedState === 'clue') {
+        style['backgroundColor'] = 'grey'
+    }
+    if (props.selectedState === 'square') {
+        style['backgroundColor'] = 'yellow'
+    }
+
+    return <td style={style} onClick={this.props.onSquareClick}>{this.props.letter}</td>
 }
